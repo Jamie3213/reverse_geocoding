@@ -148,3 +148,6 @@ dmypy.json
 blog.md
 data/
 .DS_Store
+.vscode/
+**.ipynb
+**config.py
