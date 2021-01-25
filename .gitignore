@@ -150,5 +150,4 @@ logs/
 blog.md
 .DS_Store
 .vscode/
-**.ipynb
 **config.py
