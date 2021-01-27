@@ -510,6 +510,7 @@ batches = [batch for batch in make_batches(queries_str, 1_000)]
 ndjson_batches = ['{}\n' + '\n{}\n'.join(batch) + '\n' for batch in batches]
 
 
+## IN A JUPYTER NOTEBOOK
 # ----- returns ~ 520ms ----- #
 %%timeit
 # TEST on 1,000 docs - query Elasticsearch with Multi-Search API
@@ -518,7 +519,8 @@ results = es.msearch(body=ndjson_batches[0], index='census_boundaries')
 # ----- returns ~ 4.6s ----- #
 %%timeit
 # TEST - query Elasticsearch with Search API in a for-loop
-results = [es.search(body=queries[i], index='census_boundaries') for i, _ in enumerate(queries[0:999])]
+results = [es.search(body=queries[i], index='census_boundaries') 
+           for i, _ in enumerate(queries[0:999])]
 
 
 # query Elasticsearch with Multi-Search API
