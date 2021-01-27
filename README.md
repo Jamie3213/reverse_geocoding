@@ -171,7 +171,7 @@ def connect_to_elastic(es_url, es_user, es_pwd):
             scheme='https')
 ```
 
-Okay, we can connect to the cluster, so now let's read in the data. For efficiency, we'll be specific about which columns we actually need. We'll drop the label and name columns of the boundary shapefile and the LAD11NMW column from the lookup file. In addition, it's always a good idea to pass in a value for the dtype argument in the pandas.read_csv method, so we'll do that here as well:
+Okay, we can connect to the cluster, so now let's read in the data. For efficiency, we'll be specific about which columns we actually need. We'll drop the ```label``` and ```name``` columns of the boundary shapefile and the ```LAD11NMW``` column from the lookup file. In addition, it's always a good idea to pass in a value for the dtype argument in the pandas.read_csv method, so we'll do that here as well:
 
 ```python
 # etl.py
@@ -253,7 +253,7 @@ Now that the data is prepped, we can start to set up our index in Elasticsearch.
 }
 ```
 
-Note that we're mapping all our string fields to the keyword data type. This is different to the text data type in that keyword fields aren't analyzed (which is what we want since we're not going to perform free-text search on them). In addition, we've also added a new field called ```level_mapping```. The purpose of this field is to serve as a mapping between the generic hierarchy levels and the country-specific meaning of those levels. In the event that we decide to add a country with additional levels of granularty (e.g. the USA), we can simply add new fields to the index mapping and define the relevant translation as below. In our case, level_mapping will be a JSON object of the form:
+Note that we're mapping all our string fields to the keyword data type. This is different to the text data type in that keyword fields aren't analyzed (which is what we want since we're not going to perform free-text search on them). In addition, we've also added a new field called ```level_mapping```. The purpose of this field is to serve as a mapping between the generic hierarchy levels and the country-specific meaning of those levels. In the event that we decide to add a country with additional levels of granularty (e.g. the USA), we can simply add new fields to the index mapping and define the relevant translation as below. In our case, ```level_mapping``` will be a JSON object of the form:
 
 ```json
 { 
@@ -359,7 +359,7 @@ def index_data(es, data, index):
     return response
 ```
 
-## Executin the ETL pipeline
+## Executing the ETL pipeline
 
 Now that we've defined all the steps of our ETL process, all that's left do is create another script which imports our modules and executes them whilst doing some basic exception handling and logging:
 
@@ -454,7 +454,7 @@ After the script has finished running, we can take a look at the log file (or th
 
 ## Testing the Functionality
 
-We're now in a position to actually test the functionality of our new Elasticsearch index. The example below (see ```/notebooks/example.ipynb``` in this repo) gives an example of this, reverse geo-coding the coordinates of all Manchester-based postcodes in England. Note the use of the Elasticsearch Multi-Search API; whilst this requires some very specific formatting (grouping our queries into batches of New-Line Delimited JSON), the performance gain is well worth the extra effort. The Notebook contains a comparison between the Multi-Search API and naive looping with the Search API for 1,000 queries, with the Multi-Search API performing roughly nine times faster:
+We're now in a position to actually test the functionality of our new Elasticsearch index. The example below (see ```/notebooks/example.ipynb``` in this repo) gives an example of this, reverse geo-coding the coordinates of all Manchester-based postcodes in England (obtained [here](https://www.townslist.co.uk)). Note the use of the Elasticsearch Multi-Search API; whilst this requires some very specific formatting (grouping our queries into batches of New-Line Delimited JSON), the performance gain is well worth the extra effort. The Notebook contains a comparison between the Multi-Search API and naive looping with the Search API for 1,000 queries, with the Multi-Search API performing roughly nine times faster:
 
 ```python
 from elasticsearch import Elasticsearch, helpers
