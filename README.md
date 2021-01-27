@@ -194,10 +194,10 @@ def read_data(boundary_file, lookup_file):
             'level2_name', 'level3_id', 'level3_name']
     lookup = pd.read_csv(
         lookup_file,
-        eader=0,
-        ames=cols,
-        secols=cols,
-        type=lookup_dtype)
+        header=0,
+        names=cols,
+        usecols=cols,
+        dtype=lookup_dtype)
 
     return [boundaries, lookup]
 ```
