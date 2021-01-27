@@ -479,7 +479,8 @@ for row in man_postcodes.itertuples():
     lat = row.latitude
     query = {
         'size': 1,
-        '_source': {'exclude': ['geometry', 'level1*', 'level2*', 'level3_id', 'level_mapping']},
+        '_source': {'exclude': ['geometry', 'level1*', 'level2*', 
+                    'level3_id', 'level_mapping']},
         'query': {
             'bool': {
                 'filter': {
