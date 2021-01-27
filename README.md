@@ -442,7 +442,7 @@ python execute_etl.py
 
 After the script has finished running, we can take a look at the log file (or the console) to see something like the following:
 
-```bash
+```text
 2021-01-24 20:06:07,727 - etl - INFO - Configuring variables 
 2021-01-24 20:06:07,727 - etl - INFO - Connecting to Elasticsearch 
 2021-01-24 20:06:07,728 - etl - INFO - Reading data at... 
